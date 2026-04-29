@@ -6,58 +6,67 @@
 
 /** Domain categories for filtering projects */
 export type ProjectDomain =
-  | 'frontend'
-  | 'fullstack'
-  | 'data-analysis'
-  | 'data-science'
+  | "frontend"
+  | "fullstack"
+  | "data-analysis"
+  | "data-science";
 
 /** Badge labels that indicate project origin */
-export type ProjectBadge = 'Client work' | 'Personal' | 'SheCodes' | 'Kaggle'  | 'Zindi'
+export type ProjectBadge =
+  | "Client work"
+  | "Personal"
+  | "SheCodes"
+  | "Kaggle"
+  | "Zindi";
 
 /** A single portfolio project */
 export interface Project {
-  id: string
-  title: string
-  description: string
-  domain: ProjectDomain
-  badge: ProjectBadge
-  tags: string[]
-  liveUrl?: string
-  githubUrl?: string
-  previewImage?: string
+  id: string;
+  title: string;
+  description: string;
+  domain: ProjectDomain;
+  badge: ProjectBadge;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  previewImage?: string;
   /** Optional — used on individual project detail pages */
-  longDescription?: string
+  longDescription?: string;
 }
 
 /** A single experience entry (internship, volunteer, training) */
 export interface Experience {
-  id: string
-  role: string
-  organisation: string
-  period: string
-  type: 'Internship' | 'Volunteer' | 'Training'
-  description: string
-  points: string[]
+  id: string;
+  role: string;
+  organisation: string;
+  period: string;
+  type: "Internship" | "Volunteer" | "Training";
+  description: string;
+  points: string[];
 }
 
 /** A single certification */
+export type CertFileType = "image" | "pdf";
 export interface Certification {
-  id: string
-  issuer: string
-  name: string
-  detail: string
+  id: string;
+  issuer: string;
+  name: string;
+  detail: string;
+  certFile?: string;
+
   /** Optional link to credential */
-  credentialUrl?: string
+  credentialUrl?: string;
+  certFileType?: CertFileType;
 }
 
 /** A skill group (e.g. Frontend, Backend, Data) */
 export interface SkillGroup {
-  title: string
-  skills: Skill[]
+  title: string;
+  skills: Skill[];
 }
 
 /** An individual skill with a proficiency level 0–100 */
 export interface Skill {
-  name: string
-  level: number
+  name: string;
+  level: number;
 }
