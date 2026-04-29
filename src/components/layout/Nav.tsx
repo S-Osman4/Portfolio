@@ -1,1 +1,153 @@
-export default function Nav() { return <nav><p>Nav</p></nav> }
+/**
+ * Nav.tsx
+ * Fixed top navigation bar.
+ * - Transparent on load, gains background on scroll
+ * - Smooth scrolls to sections by ID on link click
+ * - Mobile: collapses to a hamburger menu
+ */
+
+import { useState, useEffect } from 'react'
+import { cn } from '../../utils/cn'
+
+/** Navigation links — add or remove sections here only */
+const NAV_LINKS = [
+  { label: 'Projects',       href: '#projects'       },
+  { label: 'Experience',     href: '#experience'     },
+  { label: 'Skills',         href: '#skills'         },
+  { label: 'Certifications', href: '#certifications' },
+] as const
+
+export default function Nav() {
+  const [scrolled,   setScrolled]   = useState(false)
+  const [menuOpen,   setMenuOpen]   = useState(false)
+
+  /** Add background once user scrolls past 20px */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  /** Close mobile menu on resize to desktop */
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false) }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  /** Smooth scroll to section and close mobile menu */
+  function handleNavClick(
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) {
+    e.preventDefault()
+    setMenuOpen(false)
+    if (href === 'body') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const target = document.querySelector(href)
+      target?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  return (
+    <header
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        scrolled
+          ? 'bg-[#f7f4ef]/90 backdrop-blur-md border-b border-black/5 py-4'
+          : 'bg-transparent py-6'
+      )}
+    >
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+
+        {/* Logo */}
+        <a
+          href="#"
+          onClick={(e) => handleNavClick(e, 'body')}
+          className="font-serif text-xl tracking-wide text-[#1a1612]"
+        >
+          Sham<em className="italic text-[#c84b2f]">so</em>
+        </a>
+
+        {/* Desktop links */}
+        <nav className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+              className="text-xs font-medium tracking-widest uppercase text-[#8a7d6e] hover:text-[#1a1612] transition-colors duration-200"
+            >
+              {label}
+            </a>
+          ))}
+
+          {/* Contact CTA */}
+          <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, '#contact')}
+            className="text-xs font-semibold tracking-wider uppercase text-[#c84b2f] border border-[#c84b2f] px-4 py-2 rounded-sm hover:bg-[#c84b2f] hover:text-white transition-all duration-200"
+          >
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile hamburger button */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          <span
+            className={cn(
+              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+              menuOpen && 'translate-y-2 rotate-45'
+            )}
+          />
+          <span
+            className={cn(
+              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+              menuOpen && 'opacity-0'
+            )}
+          />
+          <span
+            className={cn(
+              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+              menuOpen && '-translate-y-2 -rotate-45'
+            )}
+          />
+        </button>
+      </div>
+
+      {/* Mobile menu dropdown */}
+      <div
+        className={cn(
+          'md:hidden overflow-hidden transition-all duration-300',
+          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        )}
+      >
+        <nav className="flex flex-col px-6 pb-6 pt-4 gap-4 bg-[#f7f4ef] border-t border-black/5">
+          {NAV_LINKS.map(({ label, href }) => (
+            <a
+              key={href}
+              href={href}
+              onClick={(e) => handleNavClick(e, href)}
+              className="text-xs font-medium tracking-widest uppercase text-[#8a7d6e] hover:text-[#1a1612] transition-colors duration-200"
+            >
+              {label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, '#contact')}
+            className="text-xs font-semibold tracking-widest uppercase text-[#c84b2f] border border-[#c84b2f] px-4 py-2 rounded-sm text-center hover:bg-[#c84b2f] hover:text-white transition-all duration-200"
+          >
+            Contact
+          </a>
+        </nav>
+      </div>
+    </header>
+  )
+}
