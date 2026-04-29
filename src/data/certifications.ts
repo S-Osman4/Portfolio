@@ -1,4 +1,4 @@
-import { Certification } from '../types'
+import type { Certification } from '../types'
 
 /**
  * Certifications list.
