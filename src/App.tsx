@@ -31,7 +31,7 @@ function Home() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Portfolio">
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
