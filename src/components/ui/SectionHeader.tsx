@@ -1,26 +1,23 @@
 /**
  * SectionHeader.tsx
  * Reusable section header used by every section below the hero.
- * Renders a section number, title with optional italic accent word,
- * and a decorative horizontal rule.
  *
- * Usage:
- * <SectionHeader num="01" title="Selected" accent="work" />
- * → renders: "Selected work" where "work" is italic + accent coloured
+ * The optional `dark` prop switches text and rule colours
+ * for sections with a dark background (e.g. Contact).
  */
 
 import { motion } from 'framer-motion'
+import { cn } from '../../utils/cn'
 
 interface SectionHeaderProps {
-  /** Two-digit section number e.g. "01" */
   num: string
-  /** Main title text before the accent word */
   title: string
-  /** Italic accent word rendered after the title */
   accent: string
+  /** Set to true when the section background is dark */
+  dark?: boolean
 }
 
-export default function SectionHeader({ num, title, accent }: SectionHeaderProps) {
+export default function SectionHeader({ num, title, accent, dark = false }: SectionHeaderProps) {
   return (
     <motion.div
       className="flex items-baseline gap-5 mb-14"
@@ -30,19 +27,39 @@ export default function SectionHeader({ num, title, accent }: SectionHeaderProps
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {/* Section number */}
-      <span className="font-mono text-[11px] tracking-widest text-[#c84b2f] shrink-0">
+      <span
+        className={cn(
+          'font-mono text-[11px] tracking-widest shrink-0',
+          dark ? 'text-[#e8a87c]' : 'text-[#c84b2f]'
+        )}
+      >
         {num}
       </span>
 
       {/* Title */}
-      <h2 className="font-serif font-light text-[clamp(32px,5vw,52px)] leading-tight text-[#1a1612] shrink-0">
+      <h2
+        className={cn(
+          'font-serif font-light text-[clamp(32px,5vw,52px)] leading-tight shrink-0',
+          dark ? 'text-[#f7f4ef]' : 'text-[#1a1612]'
+        )}
+      >
         {title}{' '}
-        <em className="italic text-[#c84b2f]">{accent}</em>
+        <em
+          className={cn(
+            'italic',
+            dark ? 'text-[#e8a87c]' : 'text-[#c84b2f]'
+          )}
+        >
+          {accent}
+        </em>
       </h2>
 
-      {/* Decorative rule — fills remaining space */}
+      {/* Decorative rule */}
       <div
-        className="flex-1 h-px bg-black/10 ml-4 self-center"
+        className={cn(
+          'flex-1 h-px ml-4 self-center',
+          dark ? 'bg-[#f7f4ef]/15' : 'bg-black/10'
+        )}
         aria-hidden="true"
       />
     </motion.div>
