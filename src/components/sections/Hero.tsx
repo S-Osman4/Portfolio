@@ -25,7 +25,7 @@ const fadeUp = {
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay, ease: 'easeOut' },
+    transition: { duration: 0.6, delay },
   }),
 }
 
@@ -38,7 +38,7 @@ export default function Hero() {
       {/* Background watermark text */}
       <span
         aria-hidden="true"
-        className="absolute left-0 top-1/2 -translate-y-1/2 font-serif text-[18vw] leading-none text-black/[0.04] select-none pointer-events-none whitespace-nowrap"
+        className="absolute left-0 top-1/2 -translate-y-1/2 font-serif text-[18vw] leading-none text-black/4 select-none pointer-events-none whitespace-nowrap"
       >
         Build
       </span>
@@ -143,7 +143,7 @@ export default function Hero() {
         <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#b5a898] [writing-mode:vertical-rl]">
           Scroll
         </span>
-        <span className="w-px h-16 bg-gradient-to-b from-[#b5a898] to-transparent" />
+        <span className="w-px h-16 bg-linear-to-b from-[#b5a898] to-transparent" />
       </motion.div>
     </section>
   )

@@ -30,12 +30,12 @@ export default function SectionHeader({ num, title, accent }: SectionHeaderProps
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       {/* Section number */}
-      <span className="font-mono text-[11px] tracking-[0.1em] text-[#c84b2f] flex-shrink-0">
+      <span className="font-mono text-[11px] tracking-widest text-[#c84b2f] shrink-0">
         {num}
       </span>
 
       {/* Title */}
-      <h2 className="font-serif font-light text-[clamp(32px,5vw,52px)] leading-tight text-[#1a1612] flex-shrink-0">
+      <h2 className="font-serif font-light text-[clamp(32px,5vw,52px)] leading-tight text-[#1a1612] shrink-0">
         {title}{' '}
         <em className="italic text-[#c84b2f]">{accent}</em>
       </h2>

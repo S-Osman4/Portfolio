@@ -24,6 +24,7 @@ export interface Project {
   tags: string[]
   liveUrl?: string
   githubUrl?: string
+  previewImage?: string
   /** Optional — used on individual project detail pages */
   longDescription?: string
 }

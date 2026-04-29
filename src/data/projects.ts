@@ -1,4 +1,4 @@
-import { Project } from '../types'
+import type { Project } from '../types'
 
 /**
  * All portfolio projects.
@@ -20,8 +20,7 @@ export const projects: Project[] = [
   {
     id: 'client-landing-2',
     title: 'Client Landing Page II',
-    description:
-      'Second client engagement — a polished marketing page tailored to the client's brand identity.',
+    description: "Second client engagement — a polished marketing page tailored to the client's brand identity.",
     domain: 'frontend',
     badge: 'Client work',
     tags: ['HTML', 'CSS', 'JavaScript'],
