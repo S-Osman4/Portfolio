@@ -1,25 +1,33 @@
 /**
  * Nav.tsx
  * Fixed top navigation bar.
- * - Transparent on load, gains background on scroll
- * - Smooth scrolls to sections by ID on link click
- * - Mobile: collapses to a hamburger menu
+ * ...
  */
 
 import { useState, useEffect } from 'react'
 import { cn } from '../../utils/cn'
+import { useActiveSection } from '../../hooks/useActiveSection'
 
 /** Navigation links — add or remove sections here only */
 const NAV_LINKS = [
-  { label: 'Projects',       href: '#projects'       },
-  { label: 'Experience',     href: '#experience'     },
-  { label: 'Skills',         href: '#skills'         },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Projects',       href: '#projects',       id: 'projects'       },
+  { label: 'Experience',     href: '#experience',     id: 'experience'     },
+  { label: 'Skills',         href: '#skills',         id: 'skills'         },
+  { label: 'Certifications', href: '#certifications', id: 'certifications' },
 ] as const
 
 export default function Nav() {
-  const [scrolled,   setScrolled]   = useState(false)
-  const [menuOpen,   setMenuOpen]   = useState(false)
+  const [scrolled,  setScrolled]  = useState(false)
+  const [menuOpen,  setMenuOpen]  = useState(false)
+
+  const activeSection = useActiveSection([
+    'home',
+    'projects',
+    'experience',
+    'skills',
+    'certifications',
+    'contact',
+  ])
 
   /** Add background once user scrolls past 20px */
   useEffect(() => {
@@ -42,12 +50,8 @@ export default function Nav() {
   ) {
     e.preventDefault()
     setMenuOpen(false)
-    if (href === 'body') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      const target = document.querySelector(href)
-      target?.scrollIntoView({ behavior: 'smooth' })
-    }
+    const target = document.querySelector(href)
+    target?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -72,12 +76,17 @@ export default function Nav() {
 
         {/* Desktop links */}
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.map(({ label, href, id }) => (
             <a
               key={href}
               href={href}
               onClick={(e) => handleNavClick(e, href)}
-              className="text-xs font-medium tracking-widest uppercase text-[#8a7d6e] hover:text-[#1a1612] transition-colors duration-200"
+              className={cn(
+                'text-xs font-medium tracking-widest uppercase transition-colors duration-200',
+                activeSection === id
+                  ? 'text-[#1a1612]'
+                  : 'text-[#8a7d6e] hover:text-[#1a1612]'
+              )}
             >
               {label}
             </a>
@@ -87,7 +96,12 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="text-xs font-semibold tracking-wider uppercase text-[#c84b2f] border border-[#c84b2f] px-4 py-2 rounded-sm hover:bg-[#c84b2f] hover:text-white transition-all duration-200"
+            className={cn(
+              'text-xs font-semibold tracking-wider uppercase border px-4 py-2 rounded-sm transition-all duration-200',
+              activeSection === 'contact'
+                ? 'bg-[#c84b2f] text-white border-[#c84b2f]'
+                : 'text-[#c84b2f] border-[#c84b2f] hover:bg-[#c84b2f] hover:text-white'
+            )}
           >
             Contact
           </a>
@@ -100,41 +114,38 @@ export default function Nav() {
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
         >
-          <span
-            className={cn(
-              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
-              menuOpen && 'translate-y-2 rotate-45'
-            )}
-          />
-          <span
-            className={cn(
-              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
-              menuOpen && 'opacity-0'
-            )}
-          />
-          <span
-            className={cn(
-              'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
-              menuOpen && '-translate-y-2 -rotate-45'
-            )}
-          />
+          <span className={cn(
+            'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+            menuOpen && 'translate-y-2 rotate-45'
+          )} />
+          <span className={cn(
+            'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+            menuOpen && 'opacity-0'
+          )} />
+          <span className={cn(
+            'block w-6 h-0.5 bg-[#1a1612] transition-all duration-300',
+            menuOpen && '-translate-y-2 -rotate-45'
+          )} />
         </button>
       </div>
 
       {/* Mobile menu dropdown */}
-      <div
-        className={cn(
-          'md:hidden overflow-hidden transition-all duration-300',
-          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        )}
-      >
+      <div className={cn(
+        'md:hidden overflow-hidden transition-all duration-300',
+        menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      )}>
         <nav className="flex flex-col px-6 pb-6 pt-4 gap-4 bg-[#f7f4ef] border-t border-black/5">
-          {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.map(({ label, href, id }) => (
             <a
               key={href}
               href={href}
               onClick={(e) => handleNavClick(e, href)}
-              className="text-xs font-medium tracking-widest uppercase text-[#8a7d6e] hover:text-[#1a1612] transition-colors duration-200"
+              className={cn(
+                'text-xs font-medium tracking-widest uppercase transition-colors duration-200',
+                activeSection === id
+                  ? 'text-[#1a1612]'
+                  : 'text-[#8a7d6e] hover:text-[#1a1612]'
+              )}
             >
               {label}
             </a>
