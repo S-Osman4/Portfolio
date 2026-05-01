@@ -7,6 +7,7 @@
  */
 
 import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import SectionHeader from '../ui/SectionHeader'
 import FilterButton from '../ui/FilterButton'
 import ProjectCard from '../ui/ProjectCard'
@@ -53,12 +54,14 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        {/* Project grid with AnimatePresence for smooth filtering */}
+        <AnimatePresence mode="popLayout">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {filtered.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </AnimatePresence>
 
         {/* Empty state — shown if a filter returns no results */}
         {filtered.length === 0 && (
