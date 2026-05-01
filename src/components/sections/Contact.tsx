@@ -3,23 +3,19 @@
  * Final section — a simple, direct contact block.
  * No form (avoids spam and backend complexity for a portfolio).
  * Instead: email link, GitHub, LinkedIn, and location.
- *
- * Update the CONTACT object below with your real details.
  */
 
 import { motion } from 'framer-motion'
 import SectionHeader from '../ui/SectionHeader'
 
-/** Update these with your real details */
 const CONTACT = {
-    email: 'hello@shamso.dev',
-    github: 'https://github.com/shamso',
-    linkedin: 'https://linkedin.com/in/shamso',
+    email: 'osmanshamso004@gmail.com',
+    github: 'https://github.com/S-Osman4',
+    linkedin: 'https://www.linkedin.com/in/shamso-osman',
     location: 'Nairobi, Kenya · Open to remote',
 } as const
 
-/** Contact links rendered in the right column */
-const LINKS = [
+const LINKS: { label: string; display: string; href?: string }[] = [
     {
         label: 'Email',
         display: CONTACT.email,
@@ -27,20 +23,20 @@ const LINKS = [
     },
     {
         label: 'GitHub',
-        display: 'github.com/shamso',
+        display: 'github.com/S-Osman4',
         href: CONTACT.github,
     },
     {
         label: 'LinkedIn',
-        display: 'linkedin.com/in/shamso',
+        display: 'linkedin.com/in/shamso-osman',
         href: CONTACT.linkedin,
     },
     {
         label: 'Location',
         display: CONTACT.location,
-        href: null,
+        // no href — this will render as plain text
     },
-] as const
+]
 
 export default function Contact() {
     return (
@@ -59,7 +55,7 @@ export default function Contact() {
                         <p className="font-serif font-light text-[clamp(22px,3vw,34px)] leading-snug text-[#f7f4ef]/80 mb-8">
                             Open to{' '}
                             <em className="italic text-[#e8a87c]">fullstack</em>,
-                            data, and frontend roles — freelance, contract, or full-time.
+                            data, and frontend roles — freelance, contract, or full‑time.
                         </p>
 
                         <a
@@ -84,7 +80,7 @@ export default function Contact() {
                                 key={label}
                                 label={label}
                                 display={display}
-                                href={href ?? undefined}
+                                href={href}
                                 isLast={index === LINKS.length - 1}
                             />
                         ))}
@@ -95,16 +91,11 @@ export default function Contact() {
     )
 }
 
-/** ─────────────────────────────────────────────
- * ContactLink
- * Single contact row.
- * Renders as an anchor when href is provided,
- * otherwise a plain div — location has no link.
- * ───────────────────────────────────────────── */
+/* ── Contact link row ── */
 interface ContactLinkProps {
     label: string
     display: string
-    href?: string
+    href?: string          // undefined for location
     isLast: boolean
 }
 
