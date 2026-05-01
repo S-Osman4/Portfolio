@@ -7,9 +7,9 @@
  * - no previewImage       → renders coloured gradient placeholder
  *
  * Link behaviour:
- * - liveUrl provided   → shows live site link
- * - githubUrl provided → shows GitHub link
- * - neither shown when absent — client work won't show GitHub
+ * - liveUrl provided (and not '#')   → shows live site link
+ * - githubUrl provided (and not '#') → shows GitHub link
+ * - neither shown when absent or placeholder
  */
 
 import { motion } from 'framer-motion'
@@ -17,37 +17,38 @@ import Tag from './Tag'
 import { cn } from '../../utils/cn'
 import type { Project, ProjectDomain, ProjectBadge } from '../../types'
 
-/** Gradient placeholder per domain — used when no previewImage exists */
-const DOMAIN_THUMB_CLASS: Record<ProjectDomain, string> = {
-  'frontend':      'bg-gradient-to-br from-[#f0ece4] to-[#e8ddd0]',
-  'fullstack':     'bg-gradient-to-br from-[#e8f0ec] to-[#d0e4d8]',
-  'data-analysis': 'bg-gradient-to-br from-[#f0e8ec] to-[#e4d0d8]',
-  'data-science':  'bg-gradient-to-br from-[#e8ecf0] to-[#d0d8e4]',
-}
+/* ── All visual config per domain / badge ── */
+const STYLE = {
+  domain: {
+    frontend: {
+      label: 'Frontend',
+      dot: 'bg-[#c84b2f]',
+      thumb: 'bg-gradient-to-br from-[#f0ece4] to-[#e8ddd0]',
+    },
+    fullstack: {
+      label: 'Fullstack',
+      dot: 'bg-[#2e8b57]',
+      thumb: 'bg-gradient-to-br from-[#e8f0ec] to-[#d0e4d8]',
+    },
+    'data-analysis': {
+      label: 'Data Analysis',
+      dot: 'bg-[#9b3db8]',
+      thumb: 'bg-gradient-to-br from-[#f0e8ec] to-[#e4d0d8]',
+    },
+    'data-science': {
+      label: 'Data Science',
+      dot: 'bg-[#2563c4]',
+      thumb: 'bg-gradient-to-br from-[#e8ecf0] to-[#d0d8e4]',
+    },
+  } as Record<ProjectDomain, { label: string; dot: string; thumb: string }>,
 
-/** Badge colour per origin */
-const BADGE_CLASS: Record<ProjectBadge, string> = {
-  'Client work': 'bg-[#c84b2f] text-white',
-  'Personal':    'bg-[#1a1612] text-[#f7f4ef]',
-  'SheCodes':    'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
-  'Kaggle':      'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
-  'Zindi':       'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
-}
-
-/** Human-readable domain label */
-const DOMAIN_LABEL: Record<ProjectDomain, string> = {
-  'frontend':      'Frontend',
-  'fullstack':     'Fullstack',
-  'data-analysis': 'Data Analysis',
-  'data-science':  'Data Science',
-}
-
-/** Domain colour dot */
-const DOMAIN_DOT_CLASS: Record<ProjectDomain, string> = {
-  'frontend':      'bg-[#c84b2f]',
-  'fullstack':     'bg-[#2e8b57]',
-  'data-analysis': 'bg-[#9b3db8]',
-  'data-science':  'bg-[#2563c4]',
+  badge: {
+    'Client work': 'bg-[#c84b2f] text-white',
+    Personal: 'bg-[#1a1612] text-[#f7f4ef]',
+    SheCodes: 'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
+    Kaggle: 'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
+    Zindi: 'bg-[#e8e2d8] text-[#8a7d6e] border border-black/10',
+  } as Record<ProjectBadge, string>,
 }
 
 interface ProjectCardProps {
@@ -66,26 +67,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     previewImage,
   } = project
 
+  const domainStyle = STYLE.domain[domain]
+
+  /** Helper: only show link if it exists AND is not a placeholder '#' */
+  const showLive = liveUrl && liveUrl !== '#'
+  const showGitHub = githubUrl && githubUrl !== '#'
+
   return (
     <motion.article
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
       className="group bg-white border border-black/5 rounded-sm overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 hover:border-black/10 transition-all duration-300"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       {/* ── Thumbnail ── */}
-      <div className={cn(
-        'relative h-44 overflow-hidden',
-        !previewImage && DOMAIN_THUMB_CLASS[domain]
-      )}>
-
+      <div
+        className={cn(
+          'relative h-44 overflow-hidden',
+          !previewImage && domainStyle.thumb
+        )}
+      >
         {previewImage ? (
-          /**
-           * Screenshot thumbnail.
-           * group-hover:scale-105 — subtle zoom when the card is hovered.
-           * transition-transform duration-500 — slow enough to feel intentional.
-           */
           <img
             src={previewImage}
             alt={`${title} preview`}
@@ -93,34 +96,30 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          /**
-           * Gradient placeholder — shown while previewImage isn't available.
-           * Remove once all screenshots are added to public/previews/.
-           */
           <div className="w-full h-full" aria-hidden="true" />
         )}
 
-        {/* Subtle gradient overlay at the bottom of the thumbnail */}
+        {/* Overlay gradient */}
         <div
           className="absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-black/10 to-transparent"
           aria-hidden="true"
         />
 
-        {/* Badge — top left */}
+        {/* Badge */}
         <span
           className={cn(
             'absolute top-3 left-3 font-mono text-[9px] tracking-[0.12em] uppercase px-2.5 py-1 rounded-sm font-medium',
-            BADGE_CLASS[badge]
+            STYLE.badge[badge]
           )}
         >
           {badge}
         </span>
 
-        {/* Domain colour dot — top right */}
+        {/* Domain colour dot — now direct lookup, not cn() conditionals */}
         <span
           className={cn(
             'absolute top-3.5 right-3.5 w-2 h-2 rounded-full',
-            DOMAIN_DOT_CLASS[domain]
+            domainStyle.dot
           )}
           aria-hidden="true"
         />
@@ -128,18 +127,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* ── Body ── */}
       <div className="flex flex-col flex-1 p-5">
-
-        {/* Domain label */}
         <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#b5a898] mb-2">
-          {DOMAIN_LABEL[domain]}
+          {domainStyle.label}
         </p>
 
-        {/* Title */}
         <h3 className="font-serif text-xl font-normal text-[#1a1612] mb-2 leading-snug">
           {title}
         </h3>
 
-        {/* Description */}
         <p className="text-sm leading-relaxed text-[#8a7d6e] mb-4 flex-1">
           {description}
         </p>
@@ -151,12 +146,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        {/* Links — only rendered when the url exists */}
-        {(liveUrl || githubUrl) && (
+        {/* Links — only rendered when real URLs exist */}
+        {(showLive || showGitHub) && (
           <div className="flex gap-4 pt-1">
-            {liveUrl && (
-                <a
-              
+            {showLive && (
+              <a
                 href={liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -165,9 +159,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 Live site <span aria-hidden="true">→</span>
               </a>
             )}
-            {githubUrl && (
-                <a
-              
+            {showGitHub && (
+              <a
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -178,7 +171,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             )}
           </div>
         )}
-
       </div>
     </motion.article>
   )
