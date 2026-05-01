@@ -15,13 +15,13 @@ import { useRef } from 'react'
 import { useInView } from 'framer-motion'
 
 interface UseScrollRevealOptions {
-  /**
+ /**
    * Margin around the viewport before triggering.
    * Negative values trigger before the element fully enters view.
    * Default: '-80px'
    */
   margin?: string
-  /**
+ /**
    * Whether to only trigger once.
    * Default: true — elements don't re-animate on scroll back up.
    */
@@ -29,7 +29,7 @@ interface UseScrollRevealOptions {
 }
 
 interface UseScrollRevealReturn {
-  ref: React.RefObject<HTMLDivElement>
+  ref: React.RefObject<HTMLDivElement | null>
   inView: boolean
 }
 
@@ -38,7 +38,8 @@ export function useScrollReveal({
   once = true,
 }: UseScrollRevealOptions = {}): UseScrollRevealReturn {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once, margin })
+
+  const inView = useInView(ref, { once, margin } as any)
 
   return { ref, inView }
 }
