@@ -63,12 +63,21 @@ export default function Nav() {
           : 'bg-transparent py-6'
       )}
     >
+
+      <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"
+    >
+      Skip to main content
+    </a>
+
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
 
         {/* Logo */}
         <a
           href="#"
           onClick={(e) => handleNavClick(e, 'body')}
+          aria-label="Shamso Osman – back to top"
           className="font-serif text-xl tracking-wide text-[#1a1612]"
         >
           Sham<em className="italic text-[#c84b2f]">so</em>
@@ -132,7 +141,7 @@ export default function Nav() {
       {/* Mobile menu dropdown */}
       <div className={cn(
         'md:hidden overflow-hidden transition-all duration-300',
-        menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        menuOpen ? 'max-h-screen opacity-100 overflow-y-auto' : 'max-h-0 opacity-0'
       )}>
         <nav className="flex flex-col px-6 pb-6 pt-4 gap-4 bg-[#f7f4ef] border-t border-black/5">
           {NAV_LINKS.map(({ label, href, id }) => (
@@ -153,7 +162,12 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, '#contact')}
-            className="text-xs font-semibold tracking-widest uppercase text-[#c84b2f] border border-[#c84b2f] px-4 py-2 rounded-sm text-center hover:bg-[#c84b2f] hover:text-white transition-all duration-200"
+            className={cn(
+              'text-xs font-semibold tracking-widest uppercase border px-4 py-2 rounded-sm text-center transition-all duration-200',
+              activeSection === 'contact'
+                ? 'bg-[#c84b2f] text-white border-[#c84b2f]'
+                : 'text-[#c84b2f] border-[#c84b2f] hover:bg-[#c84b2f] hover:text-white'
+            )}
           >
             Contact
           </a>
