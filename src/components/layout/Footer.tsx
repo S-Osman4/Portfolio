@@ -4,6 +4,8 @@
  * Sits below the contact section inside the dark background.
  */
 
+import { scrollToTop } from '../../utils/scrollTo'
+
 export default function Footer() {
   return (
     <footer className="bg-[#1a1612] border-t border-[#f7f4ef]/08 px-6 md:px-12 py-6">
@@ -13,7 +15,7 @@ export default function Footer() {
         </p>
 
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={scrollToTop}
           className="font-mono text-xs tracking-wide text-[#f7f4ef]/60 hover:text-[#f7f4ef] transition-colors duration-200"
         >
           Back to top ↑

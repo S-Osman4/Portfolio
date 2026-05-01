@@ -6,6 +6,7 @@
 
 import { useState, useEffect } from 'react'
 import { cn } from '../../utils/cn'
+import { scrollToSection } from '../../utils/scrollTo'
 import { useActiveSection } from '../../hooks/useActiveSection'
 
 /** Navigation links — add or remove sections here only */
@@ -45,15 +46,13 @@ export default function Nav() {
 
   /** Smooth scroll to section and close mobile menu */
   function handleNavClick(
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) {
-    e.preventDefault()
-    setMenuOpen(false)
-    const target = document.querySelector(href)
-    target?.scrollIntoView({ behavior: 'smooth' })
-  }
-
+      e: React.MouseEvent<HTMLAnchorElement>,
+      href: string
+    ) {
+      e.preventDefault()
+      setMenuOpen(false)
+      scrollToSection(href)
+    }
   return (
     <header
       className={cn(

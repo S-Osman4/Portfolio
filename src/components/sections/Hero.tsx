@@ -6,6 +6,7 @@
  */
 
 import { motion } from 'framer-motion'
+import { scrollToSection } from '../../utils/scrollTo'
 
 /** Skill pills displayed below the description */
 const SKILLS = [
@@ -113,7 +114,7 @@ export default function Hero() {
             href="#projects"
             onClick={(e) => {
               e.preventDefault()
-              document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
+              scrollToSection('#projects')
             }}
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1a1612] text-[#f7f4ef] text-xs font-semibold tracking-widest uppercase rounded-sm hover:bg-[#c84b2f] transition-colors duration-200"
           >
