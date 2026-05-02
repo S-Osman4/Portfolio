@@ -1,83 +1,59 @@
-import type { Project } from '../types'
+import type { Project } from "../types";
 
-/**
- * All portfolio projects.
- * To add a new project, append an object to this array.
- * Components read from here — no hardcoding in JSX.
- */
 export const projects: Project[] = [
   {
-    id: 'client-landing-1',
-    title: 'Client Landing Page I',
+    id: "skyhaven-care",
+    title: "SkyHaven Care LLC",
     description:
-      'Designed and developed a responsive landing page for a client — from brief to deployment.',
-    domain: 'frontend',
-    badge: 'Client work',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: '#',
-    githubUrl: '#',
+      "A behavioral health residential facility website — responsive, accessible, and deployed for a US-based client.",
+    domain: "frontend",
+    badge: "Client work",
+    tags: ["HTML", "CSS", "JavaScript", "Firebase"],
+    liveUrl: "https://skyhaven-care-llc.web.app/",
+    githubUrl: undefined, // not public by request
   },
   {
-    id: 'client-landing-2',
-    title: 'Client Landing Page II',
-    description: "Second client engagement — a polished marketing page tailored to the client's brand identity.",
-    domain: 'frontend',
-    badge: 'Client work',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    liveUrl: '#',
-    githubUrl: '#',
+    id: "lasha-moments",
+    title: "Lasha Moments",
+    description:
+      "Creative agency site for a décor business — elegant, mobile-first, and tailored to their brand identity.",
+    domain: "frontend",
+    badge: "Client work",
+    tags: ["HTML", "CSS", "JavaScript", "Firebase"],
+    liveUrl: "https://lashamoments.web.app/",
+    githubUrl: undefined,
   },
   {
-    id: 'shecodes-weather',
-    title: 'Weather App',
+    id: "bookclub",
+    title: "Gated Book Club",
     description:
-      'A live weather dashboard using a public API — real-time data, location search, and animated icons.',
-    domain: 'frontend',
-    badge: 'SheCodes',
-    tags: ['JavaScript', 'API', 'CSS'],
-    liveUrl: '#',
-    githubUrl: '#',
+      "Full authentication, member management, and book tracking — frontend and backend built end to end. Hosted on Render and Supabase.",
+    domain: "fullstack",
+    badge: "Personal",
+    tags: ["React", "Node.js", "Supabase", "PostgreSQL"],
+    liveUrl: "#",
+    githubUrl: "#",
   },
   {
-    id: 'bookclub',
-    title: 'Gated Book Club',
+    id: "study-buddy",
+    title: "Study Buddy Chatbot",
     description:
-      'Full authentication, member management, and book tracking — frontend and backend built end to end. Hosted on Render and Supabase.',
-    domain: 'fullstack',
-    badge: 'Personal',
-    tags: ['React', 'Node.js', 'Supabase', 'PostgreSQL'],
-    liveUrl: '#',
-    githubUrl: '#',
+      "Japanese language learning chatbot that helped achieve 92nd percentile on JLPT N5. Built with Next.js, Cerebras Cloud SDK, and Llama 3.1.",
+    domain: "fullstack",
+    badge: "Personal",
+    tags: ["Next.js", "React", "Cerebras Cloud SDK", "Llama 3.1"],
+    liveUrl: "https://study-buddy-osik7rntz-shamso-osman.vercel.app/",
+    githubUrl: "https://github.com/S-Osman4/Cerebras/",
   },
   {
-    id: 'mentor-dashboard',
-    title: 'Mentor Activity Dashboard',
+    id: "data-science-competitions",
+    title: "Data Science Competitions",
     description:
-      'Built a personal logging system and dashboard to track volunteer mentoring sessions — from raw logs to visual insights.',
-    domain: 'data-analysis',
-    badge: 'Personal',
-    tags: ['Python', 'pandas', 'Plotly'],
-    githubUrl: '#',
+      "Multiple Kaggle challenges — 3rd place (Gold) in Wildfire Prediction, Top 25% (Silver) in Location Mention Recognition. Feature engineering, ensemble modelling, and NLP.",
+    domain: "data-science",
+    badge: "Zindi",
+    tags: ["Python", "scikit-learn", "XGBoost", "NLP"],
+    liveUrl: undefined,
+    githubUrl: "#", // add the actual repo link if available
   },
-  {
-    id: 'diabetes-predictor',
-    title: 'Diabetes Risk Predictor',
-    description:
-      'Applied diabetes biochemistry knowledge to build and deploy a risk prediction tool — PIMA dataset through to a live API with an interactive frontend.',
-    domain: 'data-science',
-    badge: 'Personal',
-    tags: ['Python', 'scikit-learn', 'FastAPI', 'React'],
-    liveUrl: '#',
-    githubUrl: '#',
-  },
-  {
-    id: 'kaggle-models',
-    title: 'Competition Models',
-    description:
-      'Predictive modelling entries across Kaggle competitions — feature engineering, model comparison, and evaluation across real datasets.',
-    domain: 'data-science',
-    badge: 'Kaggle',
-    tags: ['Python', 'XGBoost', 'scikit-learn'],
-    githubUrl: '#',
-  },
-]
+];

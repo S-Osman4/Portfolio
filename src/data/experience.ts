@@ -1,50 +1,61 @@
-import type { Experience } from '../types'
+import type { Experience } from "../types";
 
-/**
- * Work, volunteer, and training experience.
- * Ordered most recent first.
- */
 export const experiences: Experience[] = [
   {
-    id: 'internship',
-    role: 'Junior Software Developer',
-    organisation: 'Undisclosed · NDA',
-    period: '2023 – 2024',
-    type: 'Internship',
+    id: "freelance",
+    role: "Freelance Web Developer & Project Coordinator",
+    organisation: "Self‑Employed",
+    period: "Mar 2023 – Present",
+    type: "Work",
     description:
-      'Contributed to the core development team for an unreleased mobile application. Working under NDA.',
+      "End‑to‑end management of client projects — gathering requirements, setting timelines, delivering solutions, and iterating based on feedback.",
     points: [
-      'Part of the founding engineering team for a mobile product',
-      'Collaborated on architecture decisions and feature development',
-      'Worked within an agile team environment with real delivery cycles',
+      "Delivered responsive landing pages for US‑based and local clients (SkyHaven Care, Lasha Moments)",
+      "Managed full web development lifecycle from brief to deployment and maintenance",
+      "Implemented accessible, performance‑optimised interfaces using HTML, CSS, and JavaScript",
+      "Acted as primary point of contact — improved client workflows and communication",
     ],
   },
   {
-    id: 'mentor',
-    role: 'Technical Mentor',
-    organisation: 'Volunteer Programme',
-    period: '2022 – Present',
-    type: 'Volunteer',
+    id: "intern-arkhitekton",
+    role: "Junior Software Developer Intern",
+    organisation: "Arkhitekton Africa",
+    period: "Jan 2025 – Mar 2025",
+    type: "Internship",
     description:
-      'Volunteered as a technical mentor supporting early-career developers and aspiring engineers.',
+      "Sole frontend developer for an MVP farm management SaaS, collaborating with a backend developer to build and integrate the product.",
     points: [
-      'Guided mentees through foundational programming concepts and project work',
-      'Coordinated structured mentoring sessions and tracked progress over time',
-      'Built a personal dashboard to log and visualise mentoring activity',
+      "Built the MVP with React Native and Expo, reducing development time by 30% through reusable components",
+      "Integrated FastAPI and Supabase backends — implemented authentication and core features",
+      "Developed 15+ UI components optimised for non‑technical users, improving usability by 40%",
     ],
   },
   {
-    id: 'alx',
-    role: 'Software Engineering Programme',
-    organisation: 'ALX Africa',
-    period: '2022 – 2024',
-    type: 'Training',
+    id: "volunteer-mentor-alx",
+    role: "Volunteer Technical Mentor",
+    organisation: "ALX x Google Cloud Program",
+    period: "Dec 2025 – Jan 2026",
+    type: "Volunteer",
     description:
-      "Completed ALX's rigorous, project-based software engineering curriculum — one of Africa's most respected technical training programmes.",
+      "Provided daily support and motivation to 20+ learners, tracking engagement and escalating issues during a 6‑week program.",
     points: [
-      'Fullstack development, algorithms, and systems programming',
-      'Collaborative, deadline-driven project environment',
-      'Also completed ALX AIce — AI and data track',
+      "Proactively monitored learner progress and anticipated blockers before they escalated",
+      "Hosted live support sessions with focused agendas to address common challenges",
+      "Submitted weekly progress reports to program leadership for decision‑making",
     ],
   },
-]
+  {
+    id: "volunteer-tech-sisters",
+    role: "Skill Development Team Volunteer",
+    organisation: "Tech Sisters UK",
+    period: "Jul 2025 – Sept 2025",
+    type: "Volunteer",
+    description:
+      "Curated learning resources, organised peer‑study groups, and supported documentation for a 3‑month sprint.",
+    points: [
+      "Coordinated technical workshops and collaborative projects to boost community engagement",
+      "Maintained clear communication between team members and program lead",
+      "Used Notion and WhatsApp for asynchronous coordination across time zones",
+    ],
+  },
+];

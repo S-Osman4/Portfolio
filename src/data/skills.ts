@@ -1,40 +1,46 @@
-import type { SkillGroup } from '../types'
+import type { SkillGroup } from "../types";
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Frontend',
+    title: "Web & Mobile",
     skills: [
-      { name: 'React / TSX',    level: 88 },
-      { name: 'TypeScript',      level: 78 },
-      { name: 'CSS / Tailwind',  level: 85 },
-      { name: 'HTML',            level: 92 },
+      { name: "React / React Native", level: 85 },
+      { name: "Next.js", level: 78 },
+      { name: "TypeScript", level: 75 },
+      { name: "JavaScript", level: 90 },
+      { name: "HTML / CSS", level: 92 },
+      { name: "Tailwind", level: 85 },
     ],
   },
   {
-    title: 'Backend',
+    title: "Data & AI",
     skills: [
-      { name: 'Python / FastAPI', level: 80 },
-      { name: 'Node.js',          level: 74 },
-      { name: 'PostgreSQL',       level: 70 },
-      { name: 'Supabase',         level: 75 },
+      { name: "Python", level: 82 },
+      { name: "SQL", level: 70 },
+      { name: "pandas / scikit-learn", level: 78 },
+      { name: "XGBoost / SHAP", level: 65 },
+      { name: "NLP / LLMs", level: 70 },
+      { name: "Cerebras Cloud SDK", level: 68 },
     ],
   },
   {
-    title: 'Data',
+    title: "Cloud & Backend",
     skills: [
-      { name: 'pandas / numpy',   level: 82 },
-      { name: 'scikit-learn',     level: 75 },
-      { name: 'Plotly / Seaborn', level: 78 },
-      { name: 'XGBoost / SHAP',   level: 65 },
+      { name: "FastAPI", level: 72 },
+      { name: "Node.js", level: 70 },
+      { name: "Supabase", level: 75 },
+      { name: "Firebase", level: 70 },
+      { name: "GCP (Vertex AI)", level: 65 },
+      { name: "BigQuery / Cloud Run", level: 60 },
     ],
   },
   {
-    title: 'Tooling',
+    title: "Tools & Workflow",
     skills: [
-      { name: 'Git / GitHub',     level: 88 },
-      { name: 'Render / Netlify', level: 72 },
-      { name: 'Figma',            level: 60 },
-      { name: 'Jupyter',          level: 80 },
+      { name: "Git / GitHub", level: 88 },
+      { name: "Vercel / Render", level: 75 },
+      { name: "Notion / Slack", level: 85 },
+      { name: "Jupyter", level: 80 },
     ],
   },
-]
+];
