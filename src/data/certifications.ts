@@ -24,22 +24,14 @@ export const certifications: Certification[] = [
     certFileType: "image",
     credentialUrl: "#",
   },
-
-  // ── Other Professional Achievements ──
-  {
-    id: "gcp-study-jam",
-    issuer: "ALX · Google Cloud",
-    name: "Google Cloud Study Jam",
-    detail:
-      "Industry‑recognised skill badges in Vertex AI, BigQuery, and Cloud Run through hands‑on labs.",
-    credentialUrl: "#",
-  },
   {
     id: "alx-aice",
     issuer: "ALX Africa",
     name: "AI Career Essentials",
     detail:
       "Integrating AI technologies with web applications and creating interactive interfaces for AI‑generated content.",
+    certFile: "/Portfolio/certifications/ALX AiCE - AI Career Essentials.png",
+    certFileType: "image",
     credentialUrl: "#",
   },
   {
@@ -48,14 +40,9 @@ export const certifications: Certification[] = [
     name: "Software Engineering (Frontend)",
     detail:
       "12‑month immersive full‑stack development program — 70h/week, project‑based, peer‑driven.",
-    credentialUrl: "#",
-  },
-  {
-    id: "ku-data-science",
-    issuer: "Kenyatta University",
-    name: "Certificate in Data Science",
-    detail:
-      "Relevant coursework: Web Development, Databases, Algorithms, Statistical Methods, Software Engineering.",
+    certFile:
+      "/Portfolio/certifications/ALX Software Engineering Certificate (Frontend Specialisation).png",
+    certFileType: "image",
     credentialUrl: "#",
   },
 ];

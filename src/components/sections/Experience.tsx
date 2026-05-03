@@ -16,6 +16,7 @@ const TYPE_CLASS: Record<Experience['type'], string> = {
     Internship: 'bg-[#e8f0ec] text-[#2e8b57]',
     Volunteer: 'bg-[#f0e8f0] text-[#9b3db8]',
     Training: 'bg-[#fef3ee] text-[#c84b2f]',
+    Work: 'bg-[#e8f0ec] text-[#2e8b57]',
 }
 
 export default function Experience() {
