@@ -11,15 +11,15 @@ import { useActiveSection } from '../../hooks/useActiveSection'
 
 /** Navigation links — add or remove sections here only */
 const NAV_LINKS = [
-  { label: 'Projects',       href: '#projects',       id: 'projects'       },
-  { label: 'Experience',     href: '#experience',     id: 'experience'     },
-  { label: 'Skills',         href: '#skills',         id: 'skills'         },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
   { label: 'Certifications', href: '#certifications', id: 'certifications' },
 ] as const
 
 export default function Nav() {
-  const [scrolled,  setScrolled]  = useState(false)
-  const [menuOpen,  setMenuOpen]  = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const activeSection = useActiveSection([
     'home',
@@ -46,13 +46,13 @@ export default function Nav() {
 
   /** Smooth scroll to section and close mobile menu */
   function handleNavClick(
-      e: React.MouseEvent<HTMLAnchorElement>,
-      href: string
-    ) {
-      e.preventDefault()
-      setMenuOpen(false)
-      scrollToSection(href)
-    }
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) {
+    e.preventDefault()
+    setMenuOpen(false)
+    scrollToSection(href)
+  }
   return (
     <header
       className={cn(
@@ -64,13 +64,13 @@ export default function Nav() {
     >
 
       <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"
-    >
-      Skip to main content
-    </a>
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded"
+      >
+        Skip to main content
+      </a>
 
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
         {/* Logo */}
         <a
@@ -149,7 +149,7 @@ export default function Nav() {
               href={href}
               onClick={(e) => handleNavClick(e, href)}
               className={cn(
-                'text-xs font-medium tracking-widest uppercase transition-colors duration-200',
+                'text-xs font-medium tracking-wider uppercase transition-colors duration-200',
                 activeSection === id
                   ? 'text-[#1a1612]'
                   : 'text-[#8a7d6e] hover:text-[#1a1612]'
