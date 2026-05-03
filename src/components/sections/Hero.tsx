@@ -10,11 +10,11 @@ import { scrollToSection } from '../../utils/scrollTo'
 
 /** Skill pills displayed below the description */
 const SKILLS = [
-  'React · TypeScript',
+  'React · React Native · Next.js',
   'Python · FastAPI',
   'PostgreSQL · Supabase',
   'scikit-learn · pandas',
-  'Node.js',
+  'Google Cloud · Vertex AI',
 ] as const
 
 /**

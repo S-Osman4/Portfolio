@@ -40,7 +40,7 @@ export interface Experience {
   role: string;
   organisation: string;
   period: string;
-  type: "Internship" | "Volunteer" | "Training";
+  type: "Internship" | "Volunteer" | "Training" | "Work";
   description: string;
   points: string[];
 }
