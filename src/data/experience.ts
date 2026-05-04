@@ -19,7 +19,7 @@ export const experiences: Experience[] = [
   {
     id: "intern-arkhitekton",
     role: "Junior Software Developer Intern",
-    organisation: "Arkhitekton Africa",
+    organisation: "Sowphie",
     period: "Jan 2025 – Mar 2025",
     type: "Internship",
     description:

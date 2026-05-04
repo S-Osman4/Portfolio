@@ -34,14 +34,14 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-end px-6 pb-20 overflow-hidden bg-[#f7f4ef] md:px-12"
+      className="relative min-h-screen flex flex-col justify-end px-6 pt-24 pb-20 overflow-hidden bg-[#f7f4ef] md:px-12"
     >
       {/* Background watermark text */}
       <span
         aria-hidden="true"
-        className="absolute left-0 top-1/2 -translate-y-1/2 font-serif text-[18vw] leading-none text-black/4 select-none pointer-events-none whitespace-nowrap"
+        className="absolute left-0 top-1/2 -translate-y-1/2 font-serif text-[clamp(3rem,9vw,10rem)] leading-none text-black/4 select-none pointer-events-none whitespace-nowrap"
       >
-        Build
+        Build · Analyze · Repeat
       </span>
 
       {/* Content */}
@@ -67,7 +67,7 @@ export default function Hero() {
           animate="visible"
           custom={0.1}
         >
-          Shamso
+          Hi, I'm Shamso
           <br />
           <em className="italic text-[#c84b2f]">Osman</em>
         </motion.h1>
@@ -80,7 +80,7 @@ export default function Hero() {
           animate="visible"
           custom={0.2}
         >
-          Fullstack engineer and data practitioner — I build products that work
+          Fullstack engineer and data practitioner. I build products that work
           and find meaning in the data behind them. Based in Nairobi, open to remote.
         </motion.p>
 
